@@ -75,10 +75,61 @@ router.patch('/books/:id', function(req, res, next) {
     .catch((err) => next(err));
 });
 
+
 router.delete('/books/:id', function(req, res, next) {
-  const id = req.params.id;
+  let book;
   knex('books')
-    
-})
+    .where('id', req.params.id)
+    .first()
+    .then((row) => {
+      if(!row) {
+        return next();
+      }
+      book = row;
+      return knex('books')
+        .del()
+        .where('id', req.params.id)
+    })
+    .then(() => {
+      delete book.id;
+      const deletedBook = {
+        title: book.title,
+        author: book.author,
+        genre: book.genre,
+        description: book.description,
+        coverUrl: book.cover_url
+      };
+      res.send(deletedBook);
+    })
+    .catch((err) => next(err));
+});
+
+// router.delete('/books/:id', function(req, res, next) {
+//   const id = req.params.id;
+//   knex('books')
+//     .where('id', id)
+//     .first()
+//     .then((row) => {
+//       if(!row) {
+//         return next();
+//       }
+//       let book = row;
+//       return knex('books')
+//         .del()
+//         .where('id', id)
+//     })
+//     .then(() => {
+//       delete book.id;
+//       const deletedBook = {
+//         title: book.title,
+//         author: book.author,
+//         genre: book.genre,
+//         description: book.description,
+//         coverUrl: book.cover_url
+//       }
+//       res.send(deletedBook)
+//     })
+//     .catch((err) => next(err));
+// })
 
 module.exports = router;
