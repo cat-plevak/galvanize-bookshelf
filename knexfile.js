@@ -13,6 +13,6 @@ module.exports = {
 
   production: {
     client: 'pg',
-    conncetion: 'process.env.bookshelf_dev'
+    conncetion: process.env.DATABASE_URL
   }
 };
