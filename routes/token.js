@@ -12,26 +12,7 @@ const router = express.Router();
 
 // YOUR CODE HERE
 
-// router.post('/token', function(res, req, next) {
-//   let user;
-//   knex('users')
-//     .where('email', req.body.email)
-//     .first()
-//     .then((row) => {
-//       if(!row) {
-//         throw boom.create(400, 'bad email or password')
-//       }
-//       user = camelizeKeys(row);
-//
-//       return bcrypt.compare(req.body.password, user.hashedPassword)
-//     })
-// })
-//
-// router.get('/token', function(req, res) {
-//
-// })
-//
-// module.exports = router;
+
 
 router.post('/token', (req, res, next) => {
   let user;
