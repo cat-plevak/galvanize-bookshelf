@@ -4,11 +4,13 @@
   "description": "Create a web application to manage your book collection",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "knex migrate:latest;",
+    "start": "node server.js",
     "knex": "knex",
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
+    "devstart": "nodemon ./bin/www",
+    "nodemon": "node ./bin/www",
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
-    "start": "node server.js",
     "test": "mocha"
   },
   "repository": {
