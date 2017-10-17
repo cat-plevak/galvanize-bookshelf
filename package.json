@@ -6,9 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "knex": "knex",
-    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
-    "devstart": "nodemon ./bin/www",
-    "nodemon": "node ./bin/www",
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run",
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
     "test": "mocha"
